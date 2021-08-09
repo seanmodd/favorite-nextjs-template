@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { Button, HStack, Box, useColorMode } from '@chakra-ui/react';
+import { MyDarkModeSwitch } from 'styles/theme';
 
 const Home = () => {
   const otherrouter = useRouter();
@@ -7,6 +8,18 @@ const Home = () => {
   return (
     <>
       <div style={{ width: '100vw', justify: 'center', align: 'center' }}>
+        <HStack
+          zIndex="docked"
+          pos="fixed"
+          top="10"
+          right="500"
+          py={3}
+          px={4}
+          opacity={0.75}
+          cursor="pointer"
+        >
+          <MyDarkModeSwitch />
+        </HStack>
         <HStack
           zIndex="docked"
           pos="fixed"

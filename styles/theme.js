@@ -1,7 +1,86 @@
-import { theme as defaultTheme, extendTheme } from '@chakra-ui/react';
+import {
+  theme as defaultTheme,
+  extendTheme,
+  useColorMode,
+  IconButton,
+} from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { Button } from '@chakra-ui/button';
 import '@fontsource/raleway';
 import '@fontsource/poppins';
+import styled from 'styled-components';
+import { useColorModeValue as mode } from '@chakra-ui/color-mode';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+
+export const MyDarkModeSwitch = ({ children }) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const iconColor = {
+    light: 'black',
+    dark: 'white',
+  };
+  const bgColor = {
+    light: 'gray.300',
+    dark: 'black',
+  };
+  return (
+    <>
+      <IconButton
+        aria-label="Toggle Dark Switch"
+        icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+        onClick={toggleColorMode}
+        color={iconColor[colorMode]}
+        bg={bgColor[colorMode]}
+      >
+        {children}
+      </IconButton>
+    </>
+  );
+};
+
+const hoverStyle = {
+  boxShadow: '7px 7px 7px 7px  rgba(223, 3, 172, 0.2)',
+  textShadow: '1px 1px #ff0000',
+  transition: 'all .2s ease-out',
+  background: '#62ff00',
+  color: 'black',
+  fontWeight: '400',
+};
+const pressedStyle = {
+  background: '#0d00ff',
+  color: '#ffff00',
+  transition: 'all 0.6s ease-out',
+  textShadow: '6px 6px #ff00ae',
+  fontWeight: '400',
+};
+export const MyButton = ({ children }) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const iconColor = {
+    light: 'black',
+    dark: 'white',
+  };
+  const bgColor = {
+    light: 'gray.300',
+    dark: 'black',
+  };
+  return (
+    <div>
+      <Button
+        transition="0.5s"
+        boxShadow="3px 3px 3px 3px rgba(0, 0, 255, 0.2)"
+        bg={mode('red.500', 'blue.500')}
+        color={iconColor[colorMode]}
+        p="10px"
+        m="10px"
+        _hover={hoverStyle}
+        _active={pressedStyle}
+      >
+        {children}
+      </Button>
+    </div>
+  );
+};
+
+//! This is where the theme is created --------- //!
 
 const breakpoints = createBreakpoints({
   sm: '425px',
@@ -16,6 +95,7 @@ const theme = extendTheme({
     heading: `'Poppins', ${defaultTheme.fonts.heading}`,
     body: `'Raleway', ${defaultTheme.fonts.body}`,
   },
+  MyButton,
   breakpoints,
   components: {
     Button: {

@@ -1,11 +1,8 @@
 import Router, { useRouter } from 'next/router';
-
 import NProgress from 'nprogress';
-
 import { DefaultSeo } from 'next-seo';
-import { Box, Button, ChakraProvider, VStack } from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, HStack, VStack } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-
 import SEO from 'next-seo.config';
 import theme from 'styles/theme';
 import GlobalStyle from 'styles/styles';
@@ -22,7 +19,6 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const MotionBox = motion(Box);
 
 function MyApp({ Component, pageProps, router }) {
-  const otherrouter = useRouter();
   return (
     <ChakraProvider resetCSS theme={theme}>
       <DefaultSeo {...SEO} />
